@@ -38,6 +38,7 @@ import {
   Truncate,
   Typing,
   YTEmbed,
+  Carousel,
 } from '../';
 import Layout from './components/Layout';
 
@@ -269,6 +270,11 @@ const KitchenSink = () => (
 
         <h2>Tabs</h2>
         <Tabs />
+        <Row />
+        <hr />
+
+        <h2>Carousel</h2>
+        <Carousel />
         <Row />
         <hr />
       </div>
