@@ -9,6 +9,7 @@ const carouselContainer = css`
 
 const slidersContainer = css`
   position: relative;
+  padding: 0;
 `;
 
 const slides = css`
