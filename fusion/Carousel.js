@@ -65,7 +65,7 @@ const arrowRight = css`
 class Carousel extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   getActiveSlideStyle(selected) {
@@ -75,20 +75,40 @@ class Carousel extends Component {
     return slides;
   }
 
+  handleNavigation(index, identifier) {
+    if (identifier.toLowerCase() === 'left') {
+      this.props.leftNavigation(index);
+    } else if (identifier.toLowerCase() === 'right') {
+      this.props.rightNavigation(index);
+    }
+  }
+
   render() {
     return (
       <div>
         <div className={carouselContainer}>
-          <div className={leftArrow}>
-            <i className={arrowLeft} />
-          </div>
-          <div className={rightArrow}>
-            <i className={arrowRight} />
-          </div>
           <ul className={slidersContainer}>
             {!!this.props.carouselData &&
-              this.props.carouselData.map(({ title, url, selected }) => (
+              this.props.carouselData.map(({ title, url, selected }, i) => (
                 <li key={title} className={this.getActiveSlideStyle(selected)}>
+                  <div
+                    className={leftArrow}
+                    onClick={() => this.handleNavigation(i, 'left')}
+                    onKeyPress={() => {}}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <i className={arrowLeft} />
+                  </div>
+                  <div
+                    className={rightArrow}
+                    onClick={() => this.handleNavigation(i, 'right')}
+                    onKeyPress={() => {}}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <i className={arrowRight} />
+                  </div>
                   <img className={imgResponsive} src={url} alt={title} />
                 </li>
               ))}
@@ -106,6 +126,8 @@ Carousel.propTypes = {
       selected: PropTypes.bool,
     })
   ),
+  leftNavigation: PropTypes.func.isRequired,
+  rightNavigation: PropTypes.func.isRequired,
 };
 
 Carousel.defaultProps = {

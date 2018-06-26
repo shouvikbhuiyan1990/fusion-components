@@ -275,6 +275,8 @@ const KitchenSink = () => (
 
         <h2>Carousel</h2>
         <Carousel
+          leftNavigation={() => {}}
+          rightNavigation={() => {}}
           carouselData={[
             {
               url: 'http://via.placeholder.com/350x150',
